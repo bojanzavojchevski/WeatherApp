@@ -11,12 +11,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApp.Web", "WeatherAp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApp.Domain", "WeatherApp.Domain\WeatherApp.Domain.csproj", "{42B643BB-9FFC-4B88-A22A-13DE31665517}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApp.Application", "WeatherApp.Application\WeatherApp.Application.csproj", "{4A4286D8-0C83-48E1-8B7E-D15776919697}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApp.Service", "WeatherApp.Application\WeatherApp.Service.csproj", "{4A4286D8-0C83-48E1-8B7E-D15776919697}"
 	ProjectSection(ProjectDependencies) = postProject
 		{42B643BB-9FFC-4B88-A22A-13DE31665517} = {42B643BB-9FFC-4B88-A22A-13DE31665517}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApp.Infrastructure", "WeatherApp.Infrastructure\WeatherApp.Infrastructure.csproj", "{81F04C32-FBFD-4B9F-9997-135441D7AB5D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApp.Repository", "WeatherApp.Infrastructure\WeatherApp.Repository.csproj", "{81F04C32-FBFD-4B9F-9997-135441D7AB5D}"
 	ProjectSection(ProjectDependencies) = postProject
 		{42B643BB-9FFC-4B88-A22A-13DE31665517} = {42B643BB-9FFC-4B88-A22A-13DE31665517}
 		{4A4286D8-0C83-48E1-8B7E-D15776919697} = {4A4286D8-0C83-48E1-8B7E-D15776919697}
