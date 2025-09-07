@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WeatherApp.Domain.Domain_Models
+namespace WeatherApp.Domain.DomainModels
 {
     public class Location
     {
