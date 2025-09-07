@@ -5,6 +5,8 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-WeatherApp.Web-c2f2e573-c50e-46a5-a965-4342bda3d98f</UserSecretsId>
+    <AssemblyName>WeatherApp.Web</AssemblyName>
+    <RootNamespace>WeatherApp.Web</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,4 +1,4 @@
-﻿namespace WeatherApp.Application
+﻿namespace WeatherApp.Repository
 {
     public class Class1
     {

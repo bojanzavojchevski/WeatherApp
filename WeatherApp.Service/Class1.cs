@@ -1,4 +1,4 @@
-﻿namespace WeatherApp.Infrastructure
+﻿namespace WeatherApp.Service
 {
     public class Class1
     {

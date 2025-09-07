@@ -4,6 +4,8 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <AssemblyName>WeatherApp.Domain</AssemblyName>
+    <RootNamespace>WeatherApp.Domain</RootNamespace>
   </PropertyGroup>
 
 </Project>
