@@ -14,6 +14,10 @@ namespace WeatherApp.Repository.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
+        public DbSet<Location> Locations { get; set; }
+        public DbSet<FavoriteLocation> FavoriteLocations { get; set; }
+        public DbSet<WeatherSnapshot> WeatherSnapshots { get; set; }
+        public DbSet<AlertRule> AlertRules { get; set; }
 
     }
 }
