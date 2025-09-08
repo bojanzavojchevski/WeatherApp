@@ -4,23 +4,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.13.35919.96
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApp.Web", "WeatherApp.Web\WeatherApp.Web.csproj", "{1513A915-5FF7-4E0F-8908-2442DA468F56}"
-	ProjectSection(ProjectDependencies) = postProject
-		{604C0300-F40A-4103-97E4-DF159034CE62} = {604C0300-F40A-4103-97E4-DF159034CE62}
-		{D73E7C0E-8707-4229-83F0-45AE869B23DF} = {D73E7C0E-8707-4229-83F0-45AE869B23DF}
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApp.Domain", "WeatherApp.Domain\WeatherApp.Domain.csproj", "{42B643BB-9FFC-4B88-A22A-13DE31665517}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApp.Service", "WeatherApp.Service\WeatherApp.Service.csproj", "{604C0300-F40A-4103-97E4-DF159034CE62}"
-	ProjectSection(ProjectDependencies) = postProject
-		{42B643BB-9FFC-4B88-A22A-13DE31665517} = {42B643BB-9FFC-4B88-A22A-13DE31665517}
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApp.Repository", "WeatherApp.Repository\WeatherApp.Repository.csproj", "{D73E7C0E-8707-4229-83F0-45AE869B23DF}"
-	ProjectSection(ProjectDependencies) = postProject
-		{42B643BB-9FFC-4B88-A22A-13DE31665517} = {42B643BB-9FFC-4B88-A22A-13DE31665517}
-		{604C0300-F40A-4103-97E4-DF159034CE62} = {604C0300-F40A-4103-97E4-DF159034CE62}
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

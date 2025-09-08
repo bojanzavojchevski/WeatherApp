@@ -8,4 +8,8 @@
     <RootNamespace>WeatherApp.Service</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\WeatherApp.Domain\WeatherApp.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

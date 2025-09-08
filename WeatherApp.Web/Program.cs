@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using WeatherApp.Web.Data;
+using WeatherApp.Repository.Data;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
