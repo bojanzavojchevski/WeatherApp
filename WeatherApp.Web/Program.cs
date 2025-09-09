@@ -1,6 +1,11 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using WeatherApp.Domain.IdentityModels;
 using WeatherApp.Repository.Data;
+using WeatherApp.Repository.Implementations;
+using WeatherApp.Repository.Interfaces;
+using WeatherApp.Service.Implementations;
+using WeatherApp.Service.Interfaces;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,8 +16,16 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<WeatherAppUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
+
+
+builder.Services.AddScoped<ILocationRepository, LocationRepository>();
+builder.Services.AddScoped<ILocationService, LocationService>();
+
+builder.Services.AddScoped<IFavoriteLocationRepository, FavoriteLocationRepository>();
+builder.Services.AddScoped<IFavoriteLocationService, FavoriteLocationService>();
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
@@ -34,6 +47,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

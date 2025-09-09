@@ -1,0 +1,31 @@
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using WeatherApp.Domain.DomainModels;
+using WeatherApp.Repository.Data;
+using WeatherApp.Repository.Interfaces;
+
+namespace WeatherApp.Repository.Implementations
+{
+    public class FavoriteLocationRepository : GenericRepository<FavoriteLocation>, IFavoriteLocationRepository
+    {
+        private readonly ApplicationDbContext _context;
+
+        public FavoriteLocationRepository(ApplicationDbContext context) : base(context)
+        {
+            _context = context;
+        }
+
+        public async Task<IEnumerable<FavoriteLocation>> GetByUserIdAsync(string userId)
+        {
+            return await _context.FavoriteLocations
+                .Include(f => f.Location)
+                .Where(f => f.UserId == userId)
+                .ToListAsync();
+        }
+
+    }
+}
