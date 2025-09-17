@@ -22,7 +22,8 @@ namespace WeatherApp.Web.Controllers
         // GET: Locations
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Locations.ToListAsync());
+            return View(await _locationService.GetAllAsync());
+
         }
 
         // GET: Locations/Details/5
