@@ -23,6 +23,7 @@ builder.Services.AddDefaultIdentity<WeatherAppUser>(options => options.SignIn.Re
 builder.Services.AddScoped<ILocationRepository, LocationRepository>();
 builder.Services.AddScoped<ILocationService, LocationService>();
 
+
 builder.Services.AddScoped<IFavoriteLocationRepository, FavoriteLocationRepository>();
 builder.Services.AddScoped<IFavoriteLocationService, FavoriteLocationService>();
 
