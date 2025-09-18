@@ -98,7 +98,7 @@ namespace WeatherApp.Web.Controllers
                 WindSpeedMs = weatherSnapshot.WindSpeedMs,
                 UvIndex = weatherSnapshot.UvIndex,
                 RainProbability = weatherSnapshot.RainProbability,
-                LocationId = weatherSnapshot.Id
+                LocationId = weatherSnapshot.LocationId
             };
 
             ViewData["LocationId"] = new SelectList(

@@ -19,7 +19,7 @@ namespace WeatherApp.Domain.DomainModels
         public decimal RainProbability { get; set; }
 
         // FK
-        public int? LocationId { get; set; }
+        public int LocationId { get; set; }
         public Location? Location { get; set; }
     }
 }
