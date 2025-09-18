@@ -20,12 +20,18 @@ builder.Services.AddDefaultIdentity<WeatherAppUser>(options => options.SignIn.Re
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
 builder.Services.AddScoped<ILocationRepository, LocationRepository>();
 builder.Services.AddScoped<ILocationService, LocationService>();
 
 
 builder.Services.AddScoped<IFavoriteLocationRepository, FavoriteLocationRepository>();
 builder.Services.AddScoped<IFavoriteLocationService, FavoriteLocationService>();
+
+builder.Services.AddScoped<IWeatherSnapshotRepository, WeatherSnapshotRepository>();
+builder.Services.AddScoped<IWeatherSnapshotService, WeatherSnapshotService>();
+
 
 builder.Services.AddControllersWithViews();
 

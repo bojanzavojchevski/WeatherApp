@@ -1,6 +1,6 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using WeatherApp.Web.Models;
+using WeatherApp.Web.ViewModels;
 
 namespace WeatherApp.Web.Controllers
 {

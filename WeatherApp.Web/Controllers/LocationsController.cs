@@ -16,9 +16,9 @@ namespace WeatherApp.Web.Controllers
     {
         private readonly ILocationService _locationService;
 
-        public LocationsController(ILocationService _locationService)
+        public LocationsController(ILocationService locationService)
         {
-            this._locationService = _locationService;
+            _locationService = locationService;
         }
 
         // GET: Locations
@@ -85,43 +85,41 @@ namespace WeatherApp.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Latitude,Longitude")] Location location)
         {
-            if(!ModelState.IsValid || id != location.Id)
+            if(id != location.Id)
             {
-                return NotFound();
+                return BadRequest();
+            }
+            if(!ModelState.IsValid)
+            {
+                return View(location);
             }
             await _locationService.UpdateAsync(location);
             return RedirectToAction(nameof(Index));
         }
 
-        //// GET: Locations/Delete/5
-        //public async Task<IActionResult> Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
+        // GET: Locations/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-        //    var location = await _context.Locations
-        //        .FirstOrDefaultAsync(m => m.Id == id);
-        //    if (location == null)
-        //    {
-        //        return NotFound();
-        //    }
+            var location = await _locationService.GetByIdAsync(id.Value);
+            if (location == null)
+            {
+                return NotFound();
+            }
 
-        //    return View(location);
-        //}
+            return View(location);
+        }
 
         // POST: Locations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var location = await _locationService.GetByIdAsync(id);
-            if (location != null)
-            {
-                await _locationService.DeleteAsync(id);
-            }
-
+            await _locationService.DeleteAsync(id);
             return RedirectToAction(nameof(Index));
         }
 
