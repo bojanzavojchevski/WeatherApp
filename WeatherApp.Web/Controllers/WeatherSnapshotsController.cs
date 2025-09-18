@@ -1,14 +1,12 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using WeatherApp.Domain.DomainModels;
 using WeatherApp.Repository.Data;
-using WeatherApp.Repository.Interfaces;
 using WeatherApp.Service.Interfaces;
 using WeatherApp.Web.ViewModels;
 
@@ -51,7 +49,8 @@ namespace WeatherApp.Web.Controllers
         // GET: WeatherSnapshots/Create
         public async Task<IActionResult> Create()
         {
-            ViewData["LocationId"] = new SelectList(await _locationService.GetAllAsync(), "Id", "Name");
+            ViewData["LocationId"] = new SelectList(
+                await _locationService.GetAllAsync(), "Id", "Name");
             return View();
         }
 
@@ -64,7 +63,8 @@ namespace WeatherApp.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                ViewData["LocationId"] = new SelectList(await _locationService.GetAllAsync(), "Id", "Name", model.LocationId);
+                ViewData["LocationId"] = new SelectList(
+                    await _locationService.GetAllAsync(), "Id", "Name", model.LocationId);
                 return View(model);
             }
 
@@ -84,14 +84,29 @@ namespace WeatherApp.Web.Controllers
         }
 
         // GET: WeatherSnapshots/Edit/5
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit(int? id)
         {
-            var snapshot = await _weatherSnapshotService.GetByIdAsync(id);
-            if(snapshot == null)
+            if (id == null) return NotFound();
+
+            var weatherSnapshot = await _weatherSnapshotService.GetByIdAsync(id.Value);
+            if (weatherSnapshot == null) return NotFound();
+
+            var vm = new WeatherSnapshotEditViewModel
             {
-                return NotFound();
-            }
-            return View(snapshot);
+                Id = weatherSnapshot.Id,
+                TakenAt = weatherSnapshot.TakenAt,
+                TemperatureC = weatherSnapshot.TemperatureC,
+                HumidityPercent = weatherSnapshot.HumidityPercent,
+                WindSpeedMs = weatherSnapshot.WindSpeedMs,
+                UvIndex = weatherSnapshot.UvIndex,
+                RainProbability = weatherSnapshot.RainProbability,
+                LocationId = weatherSnapshot.LocationId
+            };
+
+            ViewData["LocationId"] = new SelectList(
+                await _locationService.GetAllAsync(), "Id", "Name", vm.LocationId);
+
+            return View(vm);
         }
 
         // POST: WeatherSnapshots/Edit/5
@@ -99,17 +114,30 @@ namespace WeatherApp.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,TakenAt,TemperatureC,HumidityPercent,WindSpeedMs,UvIndex,RainProbability,LocationId")] WeatherSnapshot weatherSnapshot)
+        public async Task<IActionResult> Edit(int id, WeatherSnapshotEditViewModel model)
         {
-            if(id != weatherSnapshot.Id)
+            if (id != model.Id) return BadRequest();
+
+            if (!ModelState.IsValid)
             {
-                return BadRequest();
+                ViewData["LocationId"] = new SelectList(
+                    await _locationService.GetAllAsync(), "Id", "Name", model.LocationId);
+                return View(model);
             }
-            if(!ModelState.IsValid)
+
+            var snapshot = new WeatherSnapshot
             {
-                return View(weatherSnapshot);
-            }
-            await _weatherSnapshotService.UpdateAsync(weatherSnapshot);
+                Id = model.Id,
+                TakenAt = model.TakenAt,
+                TemperatureC = model.TemperatureC,
+                HumidityPercent = model.HumidityPercent,
+                WindSpeedMs = model.WindSpeedMs,
+                UvIndex = model.UvIndex,
+                RainProbability = model.RainProbability,
+                LocationId = model.LocationId
+            };
+
+            await _weatherSnapshotService.UpdateAsync(snapshot);
             return RedirectToAction(nameof(Index));
         }
 
@@ -145,4 +173,3 @@ namespace WeatherApp.Web.Controllers
         //}
     }
 }
-
