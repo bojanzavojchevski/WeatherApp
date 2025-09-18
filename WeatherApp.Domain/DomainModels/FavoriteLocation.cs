@@ -8,18 +8,16 @@ using WeatherApp.Domain.IdentityModels;
 
 namespace WeatherApp.Domain.DomainModels
 {
-    public class FavoriteLocation
+    public class FavoriteLocation : BaseEntity
     {
-        public int Id { get; set; }
+        [Required(ErrorMessage = "User ID is required.")]
+        public string? UserId { get; set; }
 
-        [Required]
-        public string UserId { get; set; }
-
-        [Required]
+        [Required(ErrorMessage = "Location ID is required.")]
         public int LocationId { get; set; }
 
 
-        public virtual Location Location { get; set; }
-        public virtual WeatherAppUser User { get; set; }
+        public virtual Location? Location { get; set; }
+        public virtual WeatherAppUser? User { get; set; }
     }
 }

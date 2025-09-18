@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace WeatherApp.Domain.DomainModels
 {
-    public class WeatherSnapshot
+    public class WeatherSnapshot : BaseEntity
     {
-        public int Id { get; set; }
         public DateTime TakenAt { get; set; }
 
         // Core Metrics
@@ -19,7 +19,7 @@ namespace WeatherApp.Domain.DomainModels
         public decimal RainProbability { get; set; }
 
         // FK
-        public int LocationId { get; set; }
-        public Location Location { get; set; }
+        public int? LocationId { get; set; }
+        public Location? Location { get; set; }
     }
 }

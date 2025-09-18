@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace WeatherApp.Domain.DomainModels
 {
-    public class AlertRule
+    public class AlertRule : BaseEntity
     {
-        public int Id { get; set; }
-
-        public string UserId { get; set; }
-        public int LocationId { get; set; }
-        public Location Location { get; set; }
+        public string? UserId { get; set; }
+        public int? LocationId { get; set; }
+        public Location? Location { get; set; }
 
         // Thresholds
         public decimal MinTempC {  get; set; }

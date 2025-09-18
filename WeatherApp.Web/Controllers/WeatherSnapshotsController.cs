@@ -55,8 +55,6 @@ namespace WeatherApp.Web.Controllers
         }
 
         // POST: WeatherSnapshots/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(WeatherSnapshotCreateViewModel model)
@@ -100,7 +98,7 @@ namespace WeatherApp.Web.Controllers
                 WindSpeedMs = weatherSnapshot.WindSpeedMs,
                 UvIndex = weatherSnapshot.UvIndex,
                 RainProbability = weatherSnapshot.RainProbability,
-                LocationId = weatherSnapshot.LocationId
+                LocationId = weatherSnapshot.Id
             };
 
             ViewData["LocationId"] = new SelectList(
@@ -110,8 +108,6 @@ namespace WeatherApp.Web.Controllers
         }
 
         // POST: WeatherSnapshots/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, WeatherSnapshotEditViewModel model)
@@ -166,10 +162,5 @@ namespace WeatherApp.Web.Controllers
             await _weatherSnapshotService.DeleteAsync(id);
             return RedirectToAction(nameof(Index));
         }
-
-        //private bool WeatherSnapshotExists(int id)
-        //{
-        //    return _context.WeatherSnapshots.Any(e => e.Id == id);
-        //}
     }
 }
