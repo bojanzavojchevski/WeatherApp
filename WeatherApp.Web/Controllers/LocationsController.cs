@@ -9,6 +9,7 @@ using WeatherApp.Domain.DomainModels;
 using WeatherApp.Repository.Data;
 using WeatherApp.Repository.Interfaces;
 using WeatherApp.Service.Interfaces;
+using WeatherApp.Web.ViewModels;
 
 namespace WeatherApp.Web.Controllers
 {
@@ -49,48 +50,68 @@ namespace WeatherApp.Web.Controllers
         // POST: Locations/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Latitude,Longitude")] Location location)
+        public async Task<IActionResult> Create(LocationViewModel model)
         {
-            if (ModelState.IsValid)
+            if(!ModelState.IsValid)
             {
-                await _locationService.AddAsync(location);
-                return RedirectToAction(nameof(Index));
+                return View(model);
             }
-            return View(location);
+
+            var location = new Location
+            {
+                Name = model.Name,
+                Latitude = model.Latitude,
+                Longitude = model.Longitude
+            };
+
+            await _locationService.AddAsync(location);
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Locations/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null)
+            var location = await _locationService.GetByIdAsync(id);
+            if(location == null)
             {
                 return NotFound();
             }
-
-            var location = await _locationService.GetByIdAsync(id.Value);
-            if (location == null)
+            
+            var model = new LocationViewModel
             {
-                return NotFound();
-            }
-            return View(location);
+                Id = location.Id,
+                Name = location.Name,
+                Latitude = location.Latitude,
+                Longitude = location.Longitude
+            };
+            return View(model);
         }
 
         // POST: Locations/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Latitude,Longitude")] Location location)
+        public async Task<IActionResult> Edit(int id, LocationViewModel model)
         {
-            if (id != location.Id)
+            if (id != model.Id)
             {
                 return BadRequest();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                await _locationService.UpdateAsync(location);
-                return RedirectToAction(nameof(Index));
+                return View(model);
             }
-            return View(location);
+
+            var location = new Location
+            {
+                Id = model.Id.Value,
+                Name = model.Name,
+                Latitude = model.Latitude,
+                Longitude = model.Longitude
+            };
+            
+            await _locationService.UpdateAsync(location);
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Locations/Delete/5
