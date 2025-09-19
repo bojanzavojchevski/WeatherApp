@@ -16,5 +16,6 @@ namespace WeatherApp.Service.Interfaces
         Task UpdateAsync(AlertRule alertRule);
         Task DeleteAsync(int id);
 
+        Task<IEnumerable<string>> GetTriggeredRuleMessagesAsync(WeatherSnapshot snapshot);
     }
 }

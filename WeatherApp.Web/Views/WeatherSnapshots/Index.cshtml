@@ -7,66 +7,62 @@
 
 <h1>Index</h1>
 
+@if (TempData["AlertMessages"] is string alertString && !string.IsNullOrWhiteSpace(alertString))
+{
+    var alerts = alertString.Split("<br/>", StringSplitOptions.RemoveEmptyEntries);
+
+    <div class="alert alert-warning shadow-sm border-0 rounded">
+        <h5 class="mb-2">
+            <i class="bi bi-exclamation-triangle-fill text-warning"></i> Alerts Triggered
+        </h5>
+        <ul class="list-unstyled mb-0">
+            @foreach (var msg in alerts)
+            {
+                <li class="mb-1">
+                    <i class="bi bi-dot text-danger"></i> @Html.Raw(msg)
+                </li>
+            }
+        </ul>
+    </div>
+}
+
+
+
+
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.TakenAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TemperatureC)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HumidityPercent)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WindSpeedMs)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UvIndex)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RainProbability)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Location)
-            </th>
+            <th>@Html.DisplayNameFor(model => model.TakenAt)</th>
+            <th>@Html.DisplayNameFor(model => model.TemperatureC)</th>
+            <th>@Html.DisplayNameFor(model => model.HumidityPercent)</th>
+            <th>@Html.DisplayNameFor(model => model.WindSpeedMs)</th>
+            <th>@Html.DisplayNameFor(model => model.UvIndex)</th>
+            <th>@Html.DisplayNameFor(model => model.RainProbability)</th>
+            <th>@Html.DisplayNameFor(model => model.Location)</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TakenAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TemperatureC)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HumidityPercent)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.WindSpeedMs)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UvIndex)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RainProbability)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Location.Name)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.TakenAt)</td>
+                <td>@Html.DisplayFor(modelItem => item.TemperatureC)</td>
+                <td>@Html.DisplayFor(modelItem => item.HumidityPercent)</td>
+                <td>@Html.DisplayFor(modelItem => item.WindSpeedMs)</td>
+                <td>@Html.DisplayFor(modelItem => item.UvIndex)</td>
+                <td>@Html.DisplayFor(modelItem => item.RainProbability)</td>
+                <td>@Html.DisplayFor(modelItem => item.Location.Name)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

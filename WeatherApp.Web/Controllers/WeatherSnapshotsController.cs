@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WeatherApp.Domain.DomainModels;
 using WeatherApp.Repository.Data;
+using WeatherApp.Service.Implementations;
 using WeatherApp.Service.Interfaces;
 using WeatherApp.Web.ViewModels;
 
@@ -16,11 +17,13 @@ namespace WeatherApp.Web.Controllers
     {
         private readonly IWeatherSnapshotService _weatherSnapshotService;
         private readonly ILocationService _locationService;
+        private readonly IAlertRuleService _alertRuleService;
 
-        public WeatherSnapshotsController(IWeatherSnapshotService weatherSnapshotService, ILocationService locationService)
+        public WeatherSnapshotsController(IWeatherSnapshotService weatherSnapshotService, ILocationService locationService, IAlertRuleService alertRuleService)
         {
             _weatherSnapshotService = weatherSnapshotService;
             _locationService = locationService;
+            _alertRuleService = alertRuleService;
         }
 
         // GET: WeatherSnapshots
@@ -78,6 +81,16 @@ namespace WeatherApp.Web.Controllers
             };
 
             await _weatherSnapshotService.AddAsync(snapshot);
+
+            // NEW: check alert rules
+            var messages = await _alertRuleService.GetTriggeredRuleMessagesAsync(snapshot);
+            if (messages.Any())
+            {
+                TempData["AlertMessages"] = string.Join("<br/>", messages);
+            }
+
+
+
             return RedirectToAction(nameof(Index));
         }
 

@@ -29,6 +29,7 @@ namespace WeatherApp.Repository.Implementations
         public async Task<IEnumerable<AlertRule>> GetByLocationIdAsync(int locationId)
         {
             return await _context.AlertRules
+                .Include(r => r.Location)
                 .Where(x => x.LocationId == locationId)
                 .ToListAsync();
         }

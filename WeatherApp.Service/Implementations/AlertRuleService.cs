@@ -54,7 +54,33 @@ namespace WeatherApp.Service.Implementations
                 await _alertRuleRepository.SaveChangesAsync();
             }
         }
-            
-            
+
+        public async Task<IEnumerable<string>> GetTriggeredRuleMessagesAsync(WeatherSnapshot snapshot)
+        {
+            var rules = await _alertRuleRepository.GetByLocationIdAsync(snapshot.LocationId);
+
+            var messages = new List<string>();
+
+            foreach (var r in rules.Where(r => r.IsActive))
+            {
+                if (snapshot.TemperatureC < r.MinTempC)
+                    messages.Add($"Temperature {snapshot.TemperatureC}°C is below MinTemp {r.MinTempC}°C (Location: {r.Location?.Name})");
+
+                if (snapshot.TemperatureC > r.MaxTempC)
+                    messages.Add($"Temperature {snapshot.TemperatureC}°C is above MaxTemp {r.MaxTempC}°C");
+
+                if (snapshot.WindSpeedMs > r.MaxWindMs)
+                    messages.Add($"Wind {snapshot.WindSpeedMs} m/s exceeds MaxWind {r.MaxWindMs} m/s");
+
+                if (snapshot.UvIndex < r.MinUvIndex)
+                    messages.Add($"UV Index {snapshot.UvIndex} is below MinUV {r.MinUvIndex}");
+
+                if (snapshot.RainProbability < r.MinRainProb)
+                    messages.Add($"Rain probability {snapshot.RainProbability}% is below MinRainProb {r.MinRainProb}%");
+            }
+
+            return messages;
+        }
+
     }
 }
