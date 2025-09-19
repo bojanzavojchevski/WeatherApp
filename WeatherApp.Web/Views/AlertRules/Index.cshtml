@@ -1,45 +1,41 @@
-﻿@model IEnumerable<WeatherApp.Web.ViewModels.AlertRuleViewModel>
+﻿@model IEnumerable<WeatherApp.Web.ViewModels.AlertRuleViewModel> 
 
 @{
-    ViewData["Title"] = "Alert Rules";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+ViewData["Title"] = "Alert Rules"; Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h1>Alert Rules</h1>
-
-<p>
-    <a asp-action="Create" class="btn btn-primary">Create New</a>
+<h1>Alert Rules</h1> 
+<p> 
+    <a asp-action="Create" class="btn btn-primary">Create New</a> 
 </p>
 
 <table class="table">
-    <thead>
-        <tr>
-            <th>Location</th>
-            <th>Min Temp (°C)</th>
-            <th>Max Temp (°C)</th>
-            <th>Max Wind (m/s)</th>
-            <th>Min UV Index</th>
-            <th>Min Rain Prob (%)</th>
-            <th>Active</th>
-            <th></th>
-        </tr>
+    <thead> 
+        <tr> 
+            <th>Location</th> 
+            <th>Min Temp (°C)</th> 
+            <th>Max Temp (°C)</th> 
+            <th>Max Wind (m/s)</th> 
+            <th>Min UV Index</th> 
+            <th>Min Rain Prob (%)</th> 
+            <th>Active</th> <th></th> 
+        </tr> 
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>@item.LocationName</td>
-                <td>@item.MinTempC</td>
-                <td>@item.MaxTempC</td>
-                <td>@item.MaxWindMs</td>
-                <td>@item.MinUvIndex</td>
-                <td>@item.MinRainProb</td>
-                <td>@(item.IsActive ? "Yes" : "No")</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Edit</a>
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">Details</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
-                </td>
+            <tr> 
+                <td>@item.LocationName</td> 
+                <td>@item.MinTempC</td> 
+                <td>@item.MaxTempC</td> 
+                <td>@item.MaxWindMs</td> 
+                <td>@item.MinUvIndex</td> 
+                <td>@item.MinRainProb</td> 
+                <td>@(item.IsActive ? "Yes" : "No")</td> 
+                <td> 
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Edit</a> 
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">Details</a> 
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a> 
+                </td> 
             </tr>
         }
     </tbody>

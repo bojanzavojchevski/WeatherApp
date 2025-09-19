@@ -1,42 +1,34 @@
 ﻿@model WeatherApp.Web.ViewModels.AlertRuleViewModel
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Delete Alert Rule";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Delete</h1>
+<h1 class="mb-4 text-danger">Delete Alert Rule</h1>
 
-<h3>Are you sure you want to delete this alert rule?</h3>
-<div>
-    <h4>Alert Rule</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-3">Location</dt>
-        <dd class="col-sm-9">@Model.LocationName</dd>
+<div class="alert alert-warning">
+    <strong>Are you sure?</strong> This action cannot be undone.
+</div>
 
-        <dt class="col-sm-3">Min Temp (°C)</dt>
-        <dd class="col-sm-9">@Model.MinTempC</dd>
-
-        <dt class="col-sm-3">Max Temp (°C)</dt>
-        <dd class="col-sm-9">@Model.MaxTempC</dd>
-
-        <dt class="col-sm-3">Max Wind (m/s)</dt>
-        <dd class="col-sm-9">@Model.MaxWindMs</dd>
-
-        <dt class="col-sm-3">Min UV Index</dt>
-        <dd class="col-sm-9">@Model.MinUvIndex</dd>
-
-        <dt class="col-sm-3">Min Rain Probability (%)</dt>
-        <dd class="col-sm-9">@Model.MinRainProb</dd>
-
-        <dt class="col-sm-3">Active</dt>
-        <dd class="col-sm-9">@(Model.IsActive ? "Yes" : "No")</dd>
-    </dl>
+<div class="card shadow-sm mb-3">
+    <div class="card-body">
+        <h5 class="card-title">@Model.LocationName</h5>
+        <p class="card-text">
+            <strong>Min Temp (°C):</strong> @Model.MinTempC <br />
+            <strong>Max Temp (°C):</strong> @Model.MaxTempC <br />
+            <strong>Max Wind (m/s):</strong> @Model.MaxWindMs <br />
+            <strong>Min UV Index:</strong> @Model.MinUvIndex <br />
+            <strong>Min Rain Prob (%):</strong> @Model.MinRainProb <br />
+            <strong>Active:</strong> @(Model.IsActive ? "Yes" : "No")
+        </p>
+    </div>
 </div>
 
 <form asp-action="Delete" method="post">
     <input type="hidden" asp-for="Id" />
-    <button type="submit" class="btn btn-danger">Delete</button> |
-    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    <button type="submit" class="btn btn-danger">
+        <i class="bi bi-trash"></i> Confirm Delete
+    </button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
 </form>

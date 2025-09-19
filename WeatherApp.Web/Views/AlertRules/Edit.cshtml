@@ -1,63 +1,62 @@
 ﻿@model WeatherApp.Web.ViewModels.AlertRuleViewModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Alert Rule";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Edit</h1>
+<h1 class="mb-4">Edit Alert Rule</h1>
 
-<h4>Alert Rule</h4>
-<hr />
 <div class="row">
     <div class="col-md-6">
         <form asp-action="Edit">
             <input type="hidden" asp-for="Id" />
-
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group mb-3">
-                <label asp-for="LocationId" class="form-label"></label>
+                <label asp-for="LocationId" class="form-label">Location</label>
                 <select asp-for="LocationId" class="form-control" asp-items="ViewBag.LocationId"></select>
                 <span asp-validation-for="LocationId" class="text-danger"></span>
             </div>
 
             <div class="form-group mb-3">
-                <label asp-for="MinTempC" class="form-label"></label>
+                <label asp-for="MinTempC" class="form-label">Min Temp (°C)</label>
                 <input asp-for="MinTempC" class="form-control" />
                 <span asp-validation-for="MinTempC" class="text-danger"></span>
             </div>
 
             <div class="form-group mb-3">
-                <label asp-for="MaxTempC" class="form-label"></label>
+                <label asp-for="MaxTempC" class="form-label">Max Temp (°C)</label>
                 <input asp-for="MaxTempC" class="form-control" />
                 <span asp-validation-for="MaxTempC" class="text-danger"></span>
             </div>
 
             <div class="form-group mb-3">
-                <label asp-for="MaxWindMs" class="form-label"></label>
+                <label asp-for="MaxWindMs" class="form-label">Max Wind (m/s)</label>
                 <input asp-for="MaxWindMs" class="form-control" />
                 <span asp-validation-for="MaxWindMs" class="text-danger"></span>
             </div>
 
             <div class="form-group mb-3">
-                <label asp-for="MinUvIndex" class="form-label"></label>
+                <label asp-for="MinUvIndex" class="form-label">Min UV Index</label>
                 <input asp-for="MinUvIndex" class="form-control" />
                 <span asp-validation-for="MinUvIndex" class="text-danger"></span>
             </div>
 
             <div class="form-group mb-3">
-                <label asp-for="MinRainProb" class="form-label"></label>
+                <label asp-for="MinRainProb" class="form-label">Min Rain Probability (%)</label>
                 <input asp-for="MinRainProb" class="form-control" />
                 <span asp-validation-for="MinRainProb" class="text-danger"></span>
             </div>
 
             <div class="form-check mb-3">
                 <input class="form-check-input" asp-for="IsActive" />
-                <label class="form-check-label" asp-for="IsActive"></label>
+                <label class="form-check-label" asp-for="IsActive">Active</label>
             </div>
 
-            <button type="submit" class="btn btn-primary">Save</button> |
+            <button type="submit" class="btn btn-warning">
+                <i class="bi bi-pencil-square"></i> Save
+            </button>
             <a asp-action="Index" class="btn btn-secondary">Back to List</a>
         </form>
     </div>

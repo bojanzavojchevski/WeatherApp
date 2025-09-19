@@ -1,63 +1,68 @@
 ﻿@model WeatherApp.Web.ViewModels.AlertRuleViewModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create Alert Rule";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
+<h1 class="mb-4">Create Alert Rule</h1>
 
-<h4>AlertRule</h4>
-<hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="LocationId" class="control-label"></label>
-                <select asp-for="LocationId" class ="form-control" asp-items="ViewBag.LocationId"></select>
+
+            <div class="form-group mb-3">
+                <label asp-for="LocationId" class="form-label">Location</label>
+                <select asp-for="LocationId" class="form-control" asp-items="ViewBag.LocationId"></select>
+                <span asp-validation-for="LocationId" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="MinTempC" class="control-label"></label>
+
+            <div class="form-group mb-3">
+                <label asp-for="MinTempC" class="form-label">Min Temp (°C)</label>
                 <input asp-for="MinTempC" class="form-control" />
                 <span asp-validation-for="MinTempC" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="MaxTempC" class="control-label"></label>
+
+            <div class="form-group mb-3">
+                <label asp-for="MaxTempC" class="form-label">Max Temp (°C)</label>
                 <input asp-for="MaxTempC" class="form-control" />
                 <span asp-validation-for="MaxTempC" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="MaxWindMs" class="control-label"></label>
+
+            <div class="form-group mb-3">
+                <label asp-for="MaxWindMs" class="form-label">Max Wind (m/s)</label>
                 <input asp-for="MaxWindMs" class="form-control" />
                 <span asp-validation-for="MaxWindMs" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="MinUvIndex" class="control-label"></label>
+
+            <div class="form-group mb-3">
+                <label asp-for="MinUvIndex" class="form-label">Min UV Index</label>
                 <input asp-for="MinUvIndex" class="form-control" />
                 <span asp-validation-for="MinUvIndex" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="MinRainProb" class="control-label"></label>
+
+            <div class="form-group mb-3">
+                <label asp-for="MinRainProb" class="form-label">Min Rain Probability (%)</label>
                 <input asp-for="MinRainProb" class="form-control" />
                 <span asp-validation-for="MinRainProb" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
-                </label>
+
+            <div class="form-check mb-3">
+                <input class="form-check-input" asp-for="IsActive" />
+                <label class="form-check-label" asp-for="IsActive">Active</label>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
+
+            <button type="submit" class="btn btn-success">
+                <i class="bi bi-plus-circle"></i> Create
+            </button>
+            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

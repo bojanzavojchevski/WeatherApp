@@ -16,5 +16,6 @@ namespace WeatherApp.Service.Interfaces
         Task DeleteAsync(int id);
 
         Task<Location?> GetByCoordinatesAsync(decimal latitude, decimal longitude);
+        Task<Location?> GetByNameAsync(string name);
     }
 }

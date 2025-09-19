@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Fetch Weather";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow border-0">
+                <div class="card-body">
+                    <h2 class="mb-4 text-center">Search Weather</h2>
+
+                    <form asp-action="FetchWeather" method="post">
+                        <div class="form-group mb-3">
+                            <label for="city" class="form-label">Enter City:</label>
+                            <input type="text" name="city" id="city" class="form-control" placeholder="e.g., Skopje, Vienna" required />
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Get Weather</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

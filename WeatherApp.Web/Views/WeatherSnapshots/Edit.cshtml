@@ -1,65 +1,71 @@
 ﻿@model WeatherApp.Web.ViewModels.WeatherSnapshotEditViewModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Snapshot";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Edit</h1>
-
-<h4>WeatherSnapshot</h4>
+<h1>Edit Weather Snapshot</h1>
 <hr />
+
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
+
             <div class="form-group">
                 <label asp-for="TakenAt" class="control-label"></label>
-                <input asp-for="TakenAt" class="form-control" />
+                <input asp-for="TakenAt" type="datetime-local" class="form-control" />
                 <span asp-validation-for="TakenAt" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="TemperatureC" class="control-label"></label>
                 <input asp-for="TemperatureC" class="form-control" />
                 <span asp-validation-for="TemperatureC" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="HumidityPercent" class="control-label"></label>
                 <input asp-for="HumidityPercent" class="form-control" />
                 <span asp-validation-for="HumidityPercent" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="WindSpeedMs" class="control-label"></label>
                 <input asp-for="WindSpeedMs" class="form-control" />
                 <span asp-validation-for="WindSpeedMs" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="UvIndex" class="control-label"></label>
                 <input asp-for="UvIndex" class="form-control" />
                 <span asp-validation-for="UvIndex" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="RainProbability" class="control-label"></label>
                 <input asp-for="RainProbability" class="form-control" />
                 <span asp-validation-for="RainProbability" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="LocationId" class="control-label"></label>
                 <select asp-for="LocationId" class="form-control" asp-items="ViewBag.LocationId"></select>
                 <span asp-validation-for="LocationId" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+
+            <div class="form-group mt-3">
+                <button type="submit" class="btn btn-success">Save</button>
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

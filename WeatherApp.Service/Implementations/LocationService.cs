@@ -49,5 +49,23 @@ namespace WeatherApp.Service.Implementations
         {
             return await _locationRepository.GetByCoordinatesAsync(latitude, longitude);
         }
+
+
+
+        public async Task<int?> GetLocationIdByNameAsync(string name)
+        {
+            var location = await _locationRepository.GetByNameAsync(name);
+            return location?.Id;
+        }
+        public async Task<int> CreateLocationAsync(string name)
+        {
+            var location = new Location { Name = name };
+            await _locationRepository.AddAsync(location);
+            return location.Id;
+        }
+        public async Task<Location?> GetByNameAsync(string name)
+        {
+            return await _locationRepository.GetByNameAsync(name);
+        }
     }
 }

@@ -1,61 +1,56 @@
 ﻿@model WeatherApp.Domain.DomainModels.WeatherSnapshot
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Snapshot Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
+<h1>Snapshot Details</h1>
+<hr />
 
-<div>
-    <h4>WeatherSnapshot</h4>
-    <hr />
+@if (ViewData["AlertMessages"] is List<string> alerts && alerts.Any())
+{
+    <div class="alert alert-warning shadow-sm border-0 rounded mb-4">
+        <h5 class="mb-2">
+            <i class="bi bi-exclamation-triangle-fill text-warning"></i> Alerts Triggered
+        </h5>
+        <ul class="list-unstyled mb-0">
+            @foreach (var msg in alerts)
+            {
+                <li class="mb-1">
+                    <i class="bi bi-dot text-danger"></i> @msg
+                </li>
+            }
+        </ul>
+    </div>
+}
+
+<div class="card shadow-sm p-3 mb-4">
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TakenAt)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TakenAt)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TemperatureC)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TemperatureC)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HumidityPercent)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HumidityPercent)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.WindSpeedMs)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.WindSpeedMs)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UvIndex)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UvIndex)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.RainProbability)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.RainProbability)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Location)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Location.Name)
-        </dd>
+        <dt class="col-sm-4">Date/Time Taken</dt>
+        <dd class="col-sm-8">@Model.TakenAt</dd>
+
+        <dt class="col-sm-4">Temperature (°C)</dt>
+        <dd class="col-sm-8">@Model.TemperatureC</dd>
+
+        <dt class="col-sm-4">Humidity (%)</dt>
+        <dd class="col-sm-8">@Model.HumidityPercent</dd>
+
+        <dt class="col-sm-4">Wind Speed (m/s)</dt>
+        <dd class="col-sm-8">@Model.WindSpeedMs</dd>
+
+        <dt class="col-sm-4">UV Index</dt>
+        <dd class="col-sm-8">@Model.UvIndex</dd>
+
+        <dt class="col-sm-4">Rain Probability (%)</dt>
+        <dd class="col-sm-8">@Model.RainProbability</dd>
+
+        <dt class="col-sm-4">Location</dt>
+        <dd class="col-sm-8">@Model.Location?.Name</dd>
     </dl>
 </div>
+
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
 </div>

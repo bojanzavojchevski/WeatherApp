@@ -1,40 +1,29 @@
 ﻿@model WeatherApp.Web.ViewModels.AlertRuleViewModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Alert Rule Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
+<h1 class="mb-4">Alert Rule Details</h1>
 
-<div>
-    <h4>Alert Rule</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-3">Location</dt>
-        <dd class="col-sm-9">@Model.LocationName</dd>
-
-        <dt class="col-sm-3">Min Temp (°C)</dt>
-        <dd class="col-sm-9">@Model.MinTempC</dd>
-
-        <dt class="col-sm-3">Max Temp (°C)</dt>
-        <dd class="col-sm-9">@Model.MaxTempC</dd>
-
-        <dt class="col-sm-3">Max Wind (m/s)</dt>
-        <dd class="col-sm-9">@Model.MaxWindMs</dd>
-
-        <dt class="col-sm-3">Min UV Index</dt>
-        <dd class="col-sm-9">@Model.MinUvIndex</dd>
-
-        <dt class="col-sm-3">Min Rain Probability (%)</dt>
-        <dd class="col-sm-9">@Model.MinRainProb</dd>
-
-        <dt class="col-sm-3">Active</dt>
-        <dd class="col-sm-9">@(Model.IsActive ? "Yes" : "No")</dd>
-    </dl>
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h5 class="card-title">@Model.LocationName</h5>
+        <p class="card-text">
+            <strong>Min Temp (°C):</strong> @Model.MinTempC <br />
+            <strong>Max Temp (°C):</strong> @Model.MaxTempC <br />
+            <strong>Max Wind (m/s):</strong> @Model.MaxWindMs <br />
+            <strong>Min UV Index:</strong> @Model.MinUvIndex <br />
+            <strong>Min Rain Prob (%):</strong> @Model.MinRainProb <br />
+            <strong>Active:</strong> @(Model.IsActive ? "Yes" : "No")
+        </p>
+    </div>
 </div>
 
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a> |
+<div class="mt-3">
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
+        <i class="bi bi-pencil-square"></i> Edit
+    </a>
     <a asp-action="Index" class="btn btn-secondary">Back to List</a>
 </div>

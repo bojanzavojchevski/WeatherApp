@@ -6,6 +6,7 @@ using WeatherApp.Repository.Implementations;
 using WeatherApp.Repository.Interfaces;
 using WeatherApp.Service.Implementations;
 using WeatherApp.Service.Interfaces;
+using WeatherApp.Web.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -35,6 +36,12 @@ builder.Services.AddScoped<IWeatherSnapshotService, WeatherSnapshotService>();
 builder.Services.AddScoped<IAlertRuleRepository, AlertRuleRepository>();
 builder.Services.AddScoped<IAlertRuleService, AlertRuleService>();
 
+builder.Configuration.AddUserSecrets<Program>();
+builder.Services.AddHttpClient("OpenWeather", client =>
+{
+    client.BaseAddress = new Uri("https://api.openweathermap.org/data/2.5/");
+});
+builder.Services.AddScoped<OpenWeatherService>();
 
 builder.Services.AddControllersWithViews();
 

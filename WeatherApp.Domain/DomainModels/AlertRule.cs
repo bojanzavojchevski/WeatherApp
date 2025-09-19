@@ -9,7 +9,7 @@ namespace WeatherApp.Domain.DomainModels
     public class AlertRule : BaseEntity
     {
         public string? UserId { get; set; }
-        public int? LocationId { get; set; }
+        public int LocationId { get; set; }
         public Location? Location { get; set; }
 
         // Thresholds

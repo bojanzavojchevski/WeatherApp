@@ -24,5 +24,10 @@ namespace WeatherApp.Repository.Implementations
             return await _context.Locations
                 .FirstOrDefaultAsync(loc => loc.Latitude == latitude && loc.Longitude == longitude);
         }
+
+        public async Task<Location?> GetByNameAsync(string name)
+        {
+            return await _context.Locations.FirstOrDefaultAsync(l => l.Name == name);
+        }
     }
 }

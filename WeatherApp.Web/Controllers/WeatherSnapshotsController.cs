@@ -9,6 +9,7 @@ using WeatherApp.Domain.DomainModels;
 using WeatherApp.Repository.Data;
 using WeatherApp.Service.Implementations;
 using WeatherApp.Service.Interfaces;
+using WeatherApp.Web.Services;
 using WeatherApp.Web.ViewModels;
 
 namespace WeatherApp.Web.Controllers
@@ -18,12 +19,15 @@ namespace WeatherApp.Web.Controllers
         private readonly IWeatherSnapshotService _weatherSnapshotService;
         private readonly ILocationService _locationService;
         private readonly IAlertRuleService _alertRuleService;
+        
+        private readonly OpenWeatherService _openWeatherService;
 
-        public WeatherSnapshotsController(IWeatherSnapshotService weatherSnapshotService, ILocationService locationService, IAlertRuleService alertRuleService)
+        public WeatherSnapshotsController(IWeatherSnapshotService weatherSnapshotService, ILocationService locationService, IAlertRuleService alertRuleService, OpenWeatherService openWeatherService)
         {
             _weatherSnapshotService = weatherSnapshotService;
             _locationService = locationService;
             _alertRuleService = alertRuleService;
+            _openWeatherService = openWeatherService;
         }
 
         // GET: WeatherSnapshots
@@ -45,6 +49,9 @@ namespace WeatherApp.Web.Controllers
             {
                 return NotFound();
             }
+
+            var messages = await _alertRuleService.GetTriggeredRuleMessagesAsync(weatherSnapshot);
+            ViewData["AlertMessages"] = messages.ToList();
 
             return View(weatherSnapshot);
         }
@@ -174,6 +181,50 @@ namespace WeatherApp.Web.Controllers
         {
             await _weatherSnapshotService.DeleteAsync(id);
             return RedirectToAction(nameof(Index));
+        }
+
+        // GET: show the search form
+        [HttpGet]
+        public IActionResult FetchWeather()
+        {
+            return View();
+        }
+
+        // POST: handle form and show results
+        [HttpPost]
+        public async Task<IActionResult> FetchWeather(string city)
+        {
+            var result = await _openWeatherService.GetWeatherAsync(city);
+
+            if (result == null)
+                return Content("Could not fetch weather data.");
+
+            // Check if location exists
+            var location = await _locationService.GetByNameAsync(city);
+
+            // If not, create it
+            if (location == null)
+            {
+                location = new Location { Name = city };
+                await _locationService.AddAsync(location);
+            }
+
+            // Save snapshot
+            var snapshot = new WeatherSnapshot
+            {
+                TakenAt = DateTime.UtcNow,
+                TemperatureC = result.Main.Temp,
+                HumidityPercent = result.Main.Humidity,
+                WindSpeedMs = result.Wind.Speed,
+                UvIndex = 0, // OpenWeather doesn’t return UV directly
+                RainProbability = 0, // Simplify for now
+                LocationId = location.Id
+            };
+
+            await _weatherSnapshotService.AddAsync(snapshot);
+
+            ViewBag.City = city;
+            return View("WeatherResult", result); // goes to your nice WeatherResult.cshtml
         }
     }
 }

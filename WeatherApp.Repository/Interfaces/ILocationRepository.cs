@@ -10,5 +10,7 @@ namespace WeatherApp.Repository.Interfaces
     public interface ILocationRepository : IGenericRepository<Location>
     {
         Task<Location?> GetByCoordinatesAsync(decimal latitude, decimal longitude);
+        Task<Location?> GetByNameAsync(string name);
+
     }
 }
