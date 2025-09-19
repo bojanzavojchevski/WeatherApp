@@ -2,6 +2,7 @@
 {
     public class OpenWeatherResponseDto
     {
+        public CoordDto Coord { get; set; }
         public MainDto Main { get; set; }
         public WindDto Wind { get; set; }
         public List<WeatherDescriptionDto> Weather { get; set; }

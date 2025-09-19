@@ -207,7 +207,13 @@ namespace WeatherApp.Web.Controllers
             // If not, create it
             if (location == null)
             {
-                location = new Location { Name = city };
+                location = new Location 
+                {
+                    Name = city,
+                    Latitude = result.Coord.Lat,
+                    Longitude = result.Coord.Lon
+
+                };
                 await _locationService.AddAsync(location);
             }
 
