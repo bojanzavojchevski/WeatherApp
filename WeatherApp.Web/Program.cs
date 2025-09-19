@@ -32,6 +32,9 @@ builder.Services.AddScoped<IFavoriteLocationService, FavoriteLocationService>();
 builder.Services.AddScoped<IWeatherSnapshotRepository, WeatherSnapshotRepository>();
 builder.Services.AddScoped<IWeatherSnapshotService, WeatherSnapshotService>();
 
+builder.Services.AddScoped<IAlertRuleRepository, AlertRuleRepository>();
+builder.Services.AddScoped<IAlertRuleService, AlertRuleService>();
+
 
 builder.Services.AddControllersWithViews();
 
