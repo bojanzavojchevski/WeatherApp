@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -14,6 +15,7 @@ using WeatherApp.Web.ViewModels;
 
 namespace WeatherApp.Web.Controllers
 {
+    [Authorize]
     public class WeatherSnapshotsController : Controller
     {
         private readonly IWeatherSnapshotService _weatherSnapshotService;

@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <h2>⚡ Admin Dashboard</h2>
+    <p>Welcome, Admin! Here you can manage the system.</p>
+
+    <ul class="list-group">
+        <li class="list-group-item">
+            <a asp-controller="Locations" asp-action="Index">Manage Locations</a>
+        </li>
+        <li class="list-group-item">
+            <a asp-controller="WeatherSnapshots" asp-action="Index">View Snapshots</a>
+        </li>
+        <li class="list-group-item">
+            <a asp-controller="AlertRules" asp-action="Index">Manage Alert Rules</a>
+        </li>
+        <li class="list-group-item">
+            <a asp-controller="Admin" asp-action="Users">Manage Users</a>
+        </li>
+    </ul>
+</div>

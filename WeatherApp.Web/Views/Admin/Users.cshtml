@@ -1,0 +1,40 @@
+﻿@model IEnumerable<WeatherApp.Web.Controllers.UserWithRolesViewModel>
+
+@{
+    ViewData["Title"] = "Manage Users";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <h2>👥 Manage Users</h2>
+    <table class="table table-bordered table-striped mt-3">
+        <thead class="table-dark">
+            <tr>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.Email</td>
+                    <td>@string.Join(", ", user.Roles)</td>
+                    <td>
+                        @if (!user.Roles.Contains("Admin"))
+                        {
+                            <a asp-action="MakeAdmin" asp-route-userId="@user.UserId" class="btn btn-sm btn-success">Make Admin</a>
+                        }
+                        else
+                        {
+                            <a asp-action="RemoveAdmin" asp-route-userId="@user.UserId" class="btn btn-sm btn-warning">Remove Admin</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <a asp-action="Index" class="btn btn-secondary">⬅ Back to Dashboard</a>
+</div>
