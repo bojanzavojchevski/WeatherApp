@@ -50,8 +50,6 @@ namespace WeatherApp.Service.Implementations
             return await _locationRepository.GetByCoordinatesAsync(latitude, longitude);
         }
 
-
-
         public async Task<int?> GetLocationIdByNameAsync(string name)
         {
             var location = await _locationRepository.GetByNameAsync(name);

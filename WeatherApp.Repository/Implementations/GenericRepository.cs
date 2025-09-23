@@ -45,6 +45,5 @@ namespace WeatherApp.Repository.Implementations
         {
             await _context.SaveChangesAsync();
         }
-
     }
 }

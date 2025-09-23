@@ -91,8 +91,6 @@ namespace WeatherApp.Web.Controllers
         }
 
         // POST: AlertRules/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(AlertRuleViewModel model)
@@ -118,13 +116,11 @@ namespace WeatherApp.Web.Controllers
             
             await _alertRuleService.AddAsync(alertRule);
             return RedirectToAction(nameof(Index));
-
         }
 
         // GET: AlertRules/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
-
             var alertRule = await _alertRuleService.GetByIdAsync(id);
             if(alertRule == null)
             {
@@ -247,6 +243,5 @@ namespace WeatherApp.Web.Controllers
             await _alertRuleService.DeleteAsync(id);
             return RedirectToAction(nameof(Index));
         }
-
     }
 }

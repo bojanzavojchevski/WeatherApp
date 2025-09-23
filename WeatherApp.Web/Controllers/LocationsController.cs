@@ -14,7 +14,7 @@ using WeatherApp.Web.ViewModels;
 
 namespace WeatherApp.Web.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize]
     public class LocationsController : Controller
     {
         private readonly ILocationService _locationService;
@@ -25,12 +25,14 @@ namespace WeatherApp.Web.Controllers
         }
 
         // GET: Locations
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             return View(await _locationService.GetAllAsync());
         }
 
         // GET: Locations/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -44,6 +46,7 @@ namespace WeatherApp.Web.Controllers
         }
 
         // GET: Locations/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
@@ -52,6 +55,7 @@ namespace WeatherApp.Web.Controllers
         // POST: Locations/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(LocationViewModel model)
         {
             if(!ModelState.IsValid)
@@ -71,6 +75,7 @@ namespace WeatherApp.Web.Controllers
         }
 
         // GET: Locations/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id)
         {
             var location = await _locationService.GetByIdAsync(id);
@@ -92,6 +97,7 @@ namespace WeatherApp.Web.Controllers
         // POST: Locations/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id, LocationViewModel model)
         {
             if (id != model.Id)
@@ -117,6 +123,7 @@ namespace WeatherApp.Web.Controllers
         }
 
         // GET: Locations/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -136,6 +143,7 @@ namespace WeatherApp.Web.Controllers
         // POST: Locations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             await _locationService.DeleteAsync(id);

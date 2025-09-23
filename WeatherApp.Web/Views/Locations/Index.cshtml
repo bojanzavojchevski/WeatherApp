@@ -1,52 +1,51 @@
 ﻿@model IEnumerable<WeatherApp.Domain.DomainModels.Location>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Locations";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Locations</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<!-- Only Admins can see "Create New" -->
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="Create" class="btn btn-primary">Create New</a>
+    </p>
+}
+
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Latitude)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Longitude)
-            </th>
-            <th></th>
+            <th>@Html.DisplayNameFor(model => model.Name)</th>
+            <th>@Html.DisplayNameFor(model => model.Latitude)</th>
+            <th>@Html.DisplayNameFor(model => model.Longitude)</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Latitude)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Longitude)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                <form asp-action="Create" asp-controller="FavoriteLocations" method="post" style="display:inline">
-                    <input type="hidden" name="locationId" value="@item.Id" />
-                    <button type="submit" class="btn btn-success btn-sm">Add to Favorites</button>
-                </form>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Latitude)</td>
+                <td>@Html.DisplayFor(modelItem => item.Longitude)</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm">Details</a>
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Delete</a>
+                    }
+
+                    <form asp-action="Create" asp-controller="FavoriteLocations" method="post" style="display:inline">
+                        <input type="hidden" name="locationId" value="@item.Id" />
+                        <button type="submit" class="btn btn-success btn-sm">Add to Favorites</button>
+                    </form>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

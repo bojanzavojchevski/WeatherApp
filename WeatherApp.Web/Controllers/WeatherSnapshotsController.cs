@@ -52,6 +52,7 @@ namespace WeatherApp.Web.Controllers
                 return NotFound();
             }
 
+            // Alertrule message
             var messages = await _alertRuleService.GetTriggeredRuleMessagesAsync(weatherSnapshot);
             ViewData["AlertMessages"] = messages.ToList();
 
