@@ -77,7 +77,7 @@ app.UseStatusCodePagesWithReExecute("/Home/AccessDenied");
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=WeatherSnapshots}/{action=FetchWeather}/{id?}");
 app.MapRazorPages();
 
 await SeedRolesAndAdminAsync(app.Services);
