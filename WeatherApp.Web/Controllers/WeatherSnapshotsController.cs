@@ -208,7 +208,7 @@ namespace WeatherApp.Web.Controllers
             // If not, create it
             if (location == null)
             {
-                location = new Location 
+                location = new Location
                 {
                     Name = city,
                     Latitude = result.Coord.Lat,
@@ -218,7 +218,6 @@ namespace WeatherApp.Web.Controllers
                 await _locationService.AddAsync(location);
             }
 
-            // Save snapshot
             var snapshot = new WeatherSnapshot
             {
                 TakenAt = DateTime.UtcNow,
@@ -226,14 +225,14 @@ namespace WeatherApp.Web.Controllers
                 HumidityPercent = result.Main.Humidity,
                 WindSpeedMs = result.Wind.Speed,
                 UvIndex = 0, // OpenWeather doesn’t return UV directly
-                RainProbability = 0, // Simplify for now
+                RainProbability = 0,
                 LocationId = location.Id
             };
 
             await _weatherSnapshotService.AddAsync(snapshot);
 
             ViewBag.City = city;
-            return View("WeatherResult", result); // goes to your nice WeatherResult.cshtml
+            return View("WeatherResult", result);
         }
     }
 }

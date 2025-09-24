@@ -17,6 +17,7 @@ namespace WeatherApp.Domain.DomainModels
         public int LocationId { get; set; }
 
 
+        // FK
         public virtual Location? Location { get; set; }
         public virtual WeatherAppUser? User { get; set; }
     }

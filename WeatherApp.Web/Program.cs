@@ -45,6 +45,12 @@ builder.Services.AddHttpClient("OpenWeather", client =>
 });
 builder.Services.AddScoped<OpenWeatherService>();
 
+//builder.Services.AddHttpClient<ChatGPTService>(client =>
+//{
+//    client.BaseAddress = new Uri("https://api.openai.com/");
+//});
+//builder.Services.AddScoped<ChatGPTService>();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

@@ -59,6 +59,7 @@ namespace WeatherApp.Service.Implementations
         {
             var location = new Location { Name = name };
             await _locationRepository.AddAsync(location);
+            await _locationRepository.SaveChangesAsync();
             return location.Id;
         }
         public async Task<Location?> GetByNameAsync(string name)

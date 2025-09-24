@@ -13,7 +13,7 @@ using WeatherApp.Service.Interfaces;
 
 namespace WeatherApp.Web.Controllers
 {
-    [Authorize] // Ensure only authenticated users can access these actions
+    [Authorize]
     public class FavoriteLocationsController : Controller
     {
         private readonly IFavoriteLocationService _favoriteLocationService;
